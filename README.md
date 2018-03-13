@@ -1,5 +1,5 @@
 # makeitstripey
-Two Node.js Scripts that help create multicolored prints with a Mosaic Palette(+)
+Two Node.js Scripts that help create precisely striped prints with a Mosaic Palette(+)
 
 ## MSF Generator Usage
 
