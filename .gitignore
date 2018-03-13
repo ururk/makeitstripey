@@ -60,3 +60,4 @@ typings/
 reference/
 msfgenerator/test/
 msfgenerator/output/
+msfgenerator/config.js
