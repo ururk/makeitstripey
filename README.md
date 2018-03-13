@@ -1,5 +1,7 @@
 # makeitstripey
-Two Node.js Scripts that help create precisely striped prints with a Mosaic Palette(+)
+Two Node.js scripts that help create precisely striped prints with a Mosaic Palette(+)
+
+I'm still using Node.js 6.10.3, but it should work on newer versions of Node.
 
 ## MSF Generator Usage
 
