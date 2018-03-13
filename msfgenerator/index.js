@@ -4,17 +4,36 @@ const LineByLineReader = require('line-by-line'),
 	ieee754 = require('ieee754'),
     config = require('./config.js');
 
-const infile = 'test/eve.gcode',
-	outfile = 'test/eve2.msf';
-
-let lr = new LineByLineReader(infile),
+let argv = require('minimist')(process.argv.slice(2));
     layers = [],
     layer = 0,
     previousExtrusion = 0,
     totalLength = 0,
     interimLayerLength = 0,
     layerHeight = 99999,
-    currentLayer = 0;
+    currentLayer = 0,
+    infile = '',
+    outfile = '';
+
+// Check our input variable, ensure at least an infile is specified
+if (!argv.i) {
+	console.log('\n\nError: You must specify an input file with -i\n\n');
+	process.exit(1);
+}
+
+console.log(argv);
+
+// Process any input / out variables
+infile = argv.i;
+
+if (argv.o) {
+	outfile = argv.o;
+} else {
+	// Use asimiliar name as the infile
+	outfile = infile + '.msf';
+}
+
+let lineReader = new LineByLineReader(infile);
 
 layers[0] = {
 	layer: 0,
@@ -23,7 +42,7 @@ layers[0] = {
 	length: 0
 }
 
-lr.on('line', function (line) {
+lineReader.on('line', function (line) {
 	if (line.indexOf(';   layerHeight,') == 0) {
 		layerHeight = parseFloat(line.substring(line.indexOf(',')+1));
 	}
@@ -64,7 +83,7 @@ lr.on('line', function (line) {
 	layers[layer].lines.push(line);
 });
 
-lr.on('end', function () {
+lineReader.on('end', function () {
 	// Generate msf
 
 	var stripeHeights = config.pattern,
@@ -112,7 +131,7 @@ lr.on('end', function () {
 
 	var position = 0;
 	spliceArray.forEach(function(splice) {
-		console.log(splice.getFriendlyString());
+		// console.log(splice.getFriendlyString());
 
 		spliceLength = splice.getLength() - position;
 		position = splice.getLength();

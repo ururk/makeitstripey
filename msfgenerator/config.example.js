@@ -3,7 +3,7 @@ var config = {
 	loadingOffset: 19304,
 
 	// Correction factor = total filament requested / total filament used
-	correction: 1.0069,
+	correction: 1,
 
 	// Example from msf: cu:1Black PLA;1Transparent PLA;0;0;
 	// 0  = don't use frive / 1 = use drive

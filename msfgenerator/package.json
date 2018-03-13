@@ -6,12 +6,13 @@
   "dependencies": {
     "ejs": "^2.5.7",
     "ieee754": "^1.1.8",
-    "line-by-line": "^0.1.6"
+    "line-by-line": "^0.1.6",
+    "minimist": "^1.2.0"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "John Pariseau",
   "license": "ISC"
 }
