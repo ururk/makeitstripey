@@ -1,27 +1,27 @@
+'use strict';
+
 const LineByLineReader = require('line-by-line'),
 	ejs = require('ejs'),
 	fs = require('fs'),
 	ieee754 = require('ieee754'),
-    config = require('./config.js');
+	config = require('./config.js');
 
-let argv = require('minimist')(process.argv.slice(2));
-    layers = [],
-    layer = 0,
-    previousExtrusion = 0,
-    totalLength = 0,
-    interimLayerLength = 0,
-    layerHeight = 99999,
-    currentLayer = 0,
-    infile = '',
-    outfile = '';
+let argv = require('minimist')(process.argv.slice(2)),
+	layers = [],
+	layer = 0,
+	previousExtrusion = 0,
+	totalLength = 0,
+	interimLayerLength = 0,
+	layerHeight = 99999,
+	currentLayer = 0,
+	infile = '',
+	outfile = '';
 
 // Check our input variable, ensure at least an infile is specified
 if (!argv.i) {
 	console.log('\n\nError: You must specify an input file with -i\n\n');
 	process.exit(1);
 }
-
-console.log(argv);
 
 // Process any input / out variables
 infile = argv.i;
@@ -40,7 +40,7 @@ layers[0] = {
 	z: 0,
 	lines: [],
 	length: 0
-}
+};
 
 lineReader.on('line', function (line) {
 	if (line.indexOf(';   layerHeight,') == 0) {
@@ -52,7 +52,7 @@ lineReader.on('line', function (line) {
 		layers[layer].length = interimLayerLength;
 		interimLayerLength = 0;
 
-		var regex = /; layer ([0-9.]+), Z = ([0-9.]+)/g,
+		let regex = /; layer ([0-9.]+), Z = ([0-9.]+)/g,
 			regexResults = regex.exec(line);
 
 		if (regexResults) {
@@ -67,7 +67,7 @@ lineReader.on('line', function (line) {
 	}
 
 	if (line != 'G92 E0') {
-		var extrusionRegex = /E([\-0-9.]+)/g,
+		let extrusionRegex = /E([-0-9.]+)/g,
 			extrusionRegexResults = extrusionRegex.exec(line);
 
 		if (extrusionRegexResults) {
@@ -86,7 +86,7 @@ lineReader.on('line', function (line) {
 lineReader.on('end', function () {
 	// Generate msf
 
-	var stripeHeights = config.pattern,
+	let stripeHeights = config.pattern,
 		spliceArray = [],
 		splices = '',
 		driveIndex = 0, // tracks which array element we are on
@@ -133,7 +133,7 @@ lineReader.on('end', function () {
 	spliceArray.forEach(function(splice) {
 		// console.log(splice.getFriendlyString());
 
-		spliceLength = splice.getLength() - position;
+		let spliceLength = splice.getLength() - position;
 		position = splice.getLength();
 		if (spliceLength < 140) {
 			console.log();
@@ -148,20 +148,18 @@ lineReader.on('end', function () {
 		numberSplices: toPaddedHexString(spliceArray.length, 4),
 		splices: splices
 	}, { }, function(err, msfString){
-//    	console.log(msfString);
-
 		fs.writeFile(outfile, msfString, (err) => {
 			if (err) throw err;
 			console.log('Wrote custom msf');
 		});
 
-    });
+	});
 });
 
 
 function toPaddedHexString(num, len) {
-    let str = (num).toString(16);
-    return '0'.repeat(len - str.length) + str;
+	let str = (num).toString(16);
+	return '0'.repeat(len - str.length) + str;
 }
 
 class Splice {
