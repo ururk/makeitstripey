@@ -1,0 +1,16 @@
+{
+  "name": "gcodemodder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "line-by-line": "^0.1.6",
+    "minimist": "^1.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "John Pariseau",
+  "license": "ISC"
+}

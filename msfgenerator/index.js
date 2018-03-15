@@ -29,7 +29,7 @@ infile = argv.i;
 if (argv.o) {
 	outfile = argv.o;
 } else {
-	// Use asimiliar name as the infile
+	// Use a similiar name as the infile
 	outfile = infile + '.msf';
 }
 
