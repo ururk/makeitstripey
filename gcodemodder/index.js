@@ -59,9 +59,6 @@ lineReader.on('line', function (line) {
 		}
 
 		if (currentLayer > 0) {
-			console.log('currentStripeHeight: ' + currentStripeHeight);
-			console.log('currentDrive: ' + currentDrive);
-
 			if (currentStripeHeight > stripeHeights[currentDrive]) {
 				currentStripeHeight = layerHeight;
 				currentDrive++;
@@ -81,6 +78,7 @@ lineReader.on('line', function (line) {
 });
 
 lineReader.on('end', function () {
+	console.log('Writing File...');
 	fs.writeFileSync(outfile, '');
 	// Write modified G-code file
 	writeLines.forEach((line) => {

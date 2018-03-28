@@ -7,7 +7,7 @@ These scripts were created for a project, and I figured it can't hurt to share. 
 
 ## MSF Generator
 
-MSF Generator creates a basic msf file for use with the Mosaic Palette(+). It does not create a transition tower, so the stripe effect it generates is a bit unpredictable. Provided your machine is well calibrated, it should produce a reasonably
+MSF Generator creates a basic msf file for use with the Mosaic Palette(+). It does not create a transition tower, so the stripe effect it generates is a bit unpredictable. Provided your machine is well calibrated, it should produce a closely accurate print.
 
 **Only supports Simplify3D generated G-code**
 
